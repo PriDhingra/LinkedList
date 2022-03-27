@@ -57,7 +57,7 @@ void deleteAtBeginning(Node* &head) {
     Node* temp = head;
     head = head -> next;
 
-    delete(temp);
+    delete temp;
 }
 
 void deleteAtEnd(Node* &head) {
@@ -66,7 +66,7 @@ void deleteAtEnd(Node* &head) {
     while(temp -> next -> next != NULL) 
         temp = temp -> next;
 
-    delete(temp -> next);
+    delete temp -> next;
     temp -> next = NULL;
 }
 
@@ -89,7 +89,7 @@ void deleteAtPosition(Node* &head, int pos) {
     }
 
     Node* temp1 = temp -> next -> next;
-    delete(temp -> next);
+    delete temp -> next;
     temp -> next = temp1;
 }
 
