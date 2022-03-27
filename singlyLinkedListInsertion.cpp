@@ -43,6 +43,11 @@ void insertAtPosition(Node* &head, int data, int pos) {
         temp = temp -> next;
         pos--;
     }
+    
+    if(temp -> next == NULL) {
+        insertAtEnd(head, data);
+        return;
+    }
 
     newNode -> next = temp -> next;
     temp -> next = newNode;
