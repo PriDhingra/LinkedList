@@ -28,7 +28,7 @@ void removeDuplicatesFromSortedList(Node* head) {
 
     while(curr != NULL) {
         if(curr -> next != NULL) {
-            if(curr -> data != curr -> next -> data && curr -> next != NULL) {
+            if(curr -> data != curr -> next -> data) {
                 curr = curr -> next;
             }
             else {
