@@ -114,7 +114,7 @@ void removeLoop(Node* head) {
 
     Node* startLoop = startNodeOfLoop(head);
 
-    Node* temp = head;
+    Node* temp = startLoop;
 
     while(temp -> next != startLoop) {
         temp = temp -> next;
