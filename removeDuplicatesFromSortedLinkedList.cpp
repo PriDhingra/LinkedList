@@ -19,41 +19,10 @@ void insertAtBeginning(Node* &head, int data) {
     head = newNode;
 }
 
-void insertAtEnd(Node* &head, int data) {
-    Node* newNode = new Node(data);
-    Node* temp = head;
-
-    while(temp -> next != NULL) 
-        temp = temp -> next;
-
-    temp -> next = newNode;
-    
-}
-
-void insertAtPosition(Node* &head, int data, int pos) {
-    Node* newNode = new Node(data);
-    Node* temp = head;
-
-    if(pos == 1) {
-        insertAtBeginning(head, data);
-        return;
-    }
-
-    while(pos - 1 > 1) {
-        temp = temp -> next;
-        pos--;
-    }
-    
-    if(temp -> next == NULL) {
-        insertAtEnd(head, data);
-        return;
-    }
-
-    newNode -> next = temp -> next;
-    temp -> next = newNode;
-}
-
 void removeDuplicatesFromSortedList(Node* head) {
+    if(head == NULL)
+        return;
+
     Node* curr = head;
     Node* nodeToDelete;
 
