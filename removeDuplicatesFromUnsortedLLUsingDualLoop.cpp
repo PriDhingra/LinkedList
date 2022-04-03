@@ -1,0 +1,79 @@
+#include<iostream>
+#include<map>
+
+using namespace std;
+
+class Node {
+    public: 
+        int data;
+        Node* next;
+
+    Node(int data) {
+        this -> data = data;
+        this -> next = NULL;
+    }
+};
+
+void insertAtBeginning(Node* &head, int data) {
+    Node* newNode = new Node(data);
+    newNode -> next = head;
+    head = newNode;
+}
+
+void removeDuplicatesFromUnsortedList(Node* head) {
+    if(head == NULL)
+        return;
+
+    Node* curr = head;
+    Node* nodeToDelete;
+
+    while(curr != NULL) {
+        Node* temp = curr -> next;
+        Node* prev = curr;
+
+        while(temp != NULL) {
+            if(temp -> data == curr -> data) {
+                nodeToDelete = temp;
+                prev -> next = temp -> next;
+                temp = temp -> next;
+                delete nodeToDelete; 
+            } else {
+                prev = temp;
+                temp = temp -> next;
+            }
+        }
+
+        curr = curr -> next;
+    }
+}
+
+void printLinkedList(Node* &head) {
+    Node* temp = head;
+    while(temp != NULL) {
+        cout<<temp -> data<<" ";
+        temp = temp -> next;
+    }
+    cout<<endl;
+}
+
+int main() {
+    Node* head = NULL;
+
+    insertAtBeginning(head, 8);
+    insertAtBeginning(head, 6);
+    insertAtBeginning(head, 4);
+    insertAtBeginning(head, 8);
+    insertAtBeginning(head, 2);
+    insertAtBeginning(head, 4);
+    insertAtBeginning(head, 2);
+    insertAtBeginning(head, 4);
+    insertAtBeginning(head, 1);
+    insertAtBeginning(head, 4);
+
+    printLinkedList(head);
+    removeDuplicatesFromUnsortedList(head);
+    cout<<"After removing Duplicates\n";
+    printLinkedList(head);
+
+    return 0;
+}
