@@ -26,18 +26,14 @@ void removeDuplicatesFromSortedList(Node* head) {
     Node* curr = head;
     Node* nodeToDelete;
 
-    while(curr != NULL) {
-        if(curr -> next != NULL) {
-            if(curr -> data != curr -> next -> data) {
-                curr = curr -> next;
-            }
-            else {
-                nodeToDelete = curr -> next;
-                curr -> next = curr -> next -> next;
-                delete nodeToDelete;
-            }
-        } else {
+    while(curr -> next != NULL) {
+        if(curr -> data != curr -> next -> data) {
             curr = curr -> next;
+        }
+        else {
+            nodeToDelete = curr -> next;
+            curr -> next = curr -> next -> next;
+            delete nodeToDelete;
         }
     }
 }
