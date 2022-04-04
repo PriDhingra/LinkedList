@@ -20,6 +20,9 @@ void insertAtBeginning(Node* &head, int data) {
 }
 
 void sort0s1s2sUsingCount(Node* &head) {
+    if(head == NULL)
+        return;
+        
     Node* temp = head;
     
     int zeroCount = 0;
