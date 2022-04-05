@@ -28,14 +28,10 @@ void printLinkedList(Node* &head) {
     cout<<endl;
 }
 
-Node* reverseSecondHalfOfLL(Node* &head, Node* &slow, int count) {
-    Node* temp = head;
-
-    while(temp -> next != slow) 
-        temp = temp -> next;
+Node* reverseSecondHalfOfLL(Node* &head) {
 
     Node* prev = NULL;
-    Node* curr = slow;
+    Node* curr = head;
     Node* forward = NULL;
     while(curr != NULL) {
         forward = curr -> next;
@@ -44,56 +40,49 @@ Node* reverseSecondHalfOfLL(Node* &head, Node* &slow, int count) {
         curr = forward;
     }
 
-    temp -> next = prev;
-    printLinkedList(head);
     return prev;
+
 }
 
-bool isLLPalindrome(Node* &head) {
+Node* middleEl(Node* &head) {
     Node* slow = head;
     Node* fast = head;
-    Node* temp = head;
-    int count = 0;
-
-    while(temp != NULL) {
-        count++;
-        temp = temp -> next;
-    }
 
     while(fast -> next != NULL) {
         fast = fast -> next;
-        if(fast -> next != NULL)
+        if(fast -> next != NULL) {
             fast = fast -> next;
-
-        slow = slow -> next;
-    }
-
-    if(count % 2 != 0)
+        }
         slow = slow -> next;
 
-    slow = reverseSecondHalfOfLL(head, slow, count);
-
-    temp = head;
-    Node* curr = slow;
-    if(count % 2 == 0) {
-        while(temp != slow) {
-            if(temp -> data != curr -> data) 
-                return false;
-            else {
-                temp = temp -> next;
-                curr = curr -> next;
-            }
-        }
-    } else {
-        while(temp -> next != slow) {
-            if(temp -> data != curr -> data) 
-                return false;
-            else {
-                temp = temp -> next;
-                curr = curr -> next;
-            }
-        }
     }
+
+    return slow;
+}
+
+bool isLLPalindrome(Node* &head) {
+    if(head == NULL || head -> next == NULL) {
+        return true;
+    }
+
+    Node* middle = middleEl(head);
+
+    Node* temp = middle -> next;
+    middle -> next = reverseSecondHalfOfLL(temp);
+
+    Node* head1 = head;
+    Node* head2 = middle -> next;
+    
+    while(head2 != NULL) {
+        if(head1 -> data != head2 -> data)
+            return false;
+    
+        head1 = head1 -> next;
+        head2 = head2 -> next;
+    }
+
+    temp = middle -> next;
+    middle -> next = reverseSecondHalfOfLL(temp);
 
     return true;
 }
@@ -104,7 +93,6 @@ int main() {
     insertAtBeginning(head, 1);
     insertAtBeginning(head, 2);
     insertAtBeginning(head, 3);
-    insertAtBeginning(head, 4);
     insertAtBeginning(head, 3);
     insertAtBeginning(head, 2);
     insertAtBeginning(head, 1);
