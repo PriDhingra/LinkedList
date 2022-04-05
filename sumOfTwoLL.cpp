@@ -54,30 +54,27 @@ Node* sumOfTwoLL(Node* &head1, Node* &head2) {
 
     Node* result = NULL;
     int sum = 0;
-    while(temp1 != NULL && temp2 != NULL) {
-        sum = temp1 -> data + temp2 -> data + carry;
+    while(temp1 != NULL || temp2 != NULL || carry != 0) {
+
+        int val1 = 0;
+        if(temp1 != NULL)
+            val1 = temp1 -> data;
+
+        int val2 = 0;
+        if(temp2 != NULL) 
+            val2 = temp2 -> data;
+
+        sum = val1 + val2 + carry;
+
         insertAtBeginning(result, sum % 10);
         carry = sum / 10;
-        temp1 = temp1 -> next;
-        temp2 = temp2 -> next;
-    }
 
-    while(temp1 != NULL) {
-        sum = temp1 -> data + carry;
-        insertAtBeginning(result, sum % 10);
-        carry = sum / 10;
-        temp1 = temp1 -> next;
+        if(temp1 != NULL) 
+            temp1 = temp1 -> next;
+        
+        if(temp2 != NULL)
+            temp2 = temp2 -> next;
     }
-
-    while(temp2 != NULL) {
-        sum = temp2 -> data + carry;
-        insertAtBeginning(result, sum % 10);
-        carry = sum / 10;
-        temp2 = temp2 -> next;
-    }
-
-    if(carry != 0) 
-        insertAtBeginning(result, carry);
 
     return result;
 }
